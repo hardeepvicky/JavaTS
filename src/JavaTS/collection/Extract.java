@@ -10,8 +10,14 @@ import java.util.Map;
  */
 public class Extract 
 {
-    private static LinkedHashMap result;
-    public static LinkedHashMap get(LinkedHashMap records, String key, String value, int dim)
+    private LinkedHashMap result;
+    
+    public static Extract using ()
+    {
+        return new Extract();
+    }
+    
+    public LinkedHashMap get(LinkedHashMap records, String key, String value, int dim)
     {
         result = new LinkedHashMap();
         
@@ -20,7 +26,7 @@ public class Extract
         return result;
     }
     
-    private static void _get(LinkedHashMap records, String key, String value, int dim)
+    private void _get(LinkedHashMap records, String key, String value, int dim)
     {
         for (Iterator it = records.entrySet().iterator(); it.hasNext();) 
         {
@@ -62,7 +68,7 @@ public class Extract
         }
     }
     
-    public static LinkedHashMap get(LinkedHashMap records, int dim)
+    public LinkedHashMap get(LinkedHashMap records, int dim)
     {
         result = new LinkedHashMap();
         
@@ -71,7 +77,7 @@ public class Extract
         return result;
     }
     
-    private static void _get(LinkedHashMap records, int dim, int dimCount)
+    private void _get(LinkedHashMap records, int dim, int dimCount)
     {
         for (Iterator it = records.entrySet().iterator(); it.hasNext();) 
         {

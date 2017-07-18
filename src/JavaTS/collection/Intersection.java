@@ -44,16 +44,26 @@ public class Intersection
             
             if (main_record.containsKey(mainKey))
             {
-                for (Iterator it = other.entrySet().iterator(); it.hasNext();) 
+                String main_key_value = String.valueOf(main_record.get(mainKey));
+                
+                if (main_key_value != null)
                 {
-                    Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) it.next();
-
-                    String other_index = String.valueOf(entry.getKey());
-                    LinkedHashMap other_record = (LinkedHashMap) entry.getValue();
-                    
-                    if (other_record.containsKey(otherKey))
+                    for (Iterator it = other.entrySet().iterator(); it.hasNext();) 
                     {
-                        callbk.onMatch(main_record, other_record, main_index, other_index);
+                        Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) it.next();
+
+                        String other_index = String.valueOf(entry.getKey());
+                        LinkedHashMap other_record = (LinkedHashMap) entry.getValue();
+
+                        if (other_record.containsKey(otherKey))
+                        {
+                            String other_key_value = String.valueOf(other_record.get(otherKey));
+
+                            if (other_key_value != null && other_key_value.equals(main_key_value))
+                            {
+                                callbk.onMatch(main_record, other_record, main_index, other_index); 
+                            }
+                        }
                     }
                 }
             }

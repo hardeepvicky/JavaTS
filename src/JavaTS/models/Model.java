@@ -387,7 +387,7 @@ public abstract class Model
         {
             String foreginKey = join.key;
             
-            LinkedHashMap field_data = Extract.get(records, this.FIELD_PRIMARY, foreginKey, 2);
+            LinkedHashMap field_data = Extract.using().get(records, this.FIELD_PRIMARY, foreginKey, 2);
             TreeSet<String> id_list = new TreeSet<>(field_data.values());            
             
             QueryBuilder qB = join.queryBuilder.clone();
@@ -424,7 +424,7 @@ public abstract class Model
         {
             String foreginKey = join.key;
             
-            LinkedHashMap field_data = Extract.get(records, "", this.FIELD_PRIMARY, 2);
+            LinkedHashMap field_data = Extract.using().get(records, "", this.FIELD_PRIMARY, 2);
             TreeSet<String> id_list = new TreeSet<>(field_data.values());            
             
             QueryBuilder qB = join.queryBuilder.clone();
@@ -434,7 +434,7 @@ public abstract class Model
                 where = new Where("AND");
             }
             
-            where.add(join.key, id_list.toArray());
+            where.add(foreginKey, id_list.toArray());
             qB.setWhere(where);
             
             LinkedHashMap related_records = join.model.select(qB, true);
